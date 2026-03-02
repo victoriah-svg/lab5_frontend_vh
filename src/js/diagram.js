@@ -6,11 +6,9 @@ let allCourses = [];
 
 let sortedCourses = [];
 
-let sortedCoursesNames = [];
+let sortedPrograms = [];
 
-let sortedProgramsNumb = [];
 
-let sortedProgramsNames = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
     loadCourses();
@@ -36,14 +34,14 @@ async function loadCourses() {
                 
                 
             } else {
-                sortedProgramsNumb.push(course.applicantsTotal);
-                sortedProgramsNumb.sort((a,b) => a-b);
+                sortedPrograms.push({total: course.applicantsTotal, name: course.name});
+                sortedPrograms.sort((a,b) => a.total - b.total);
                 
             }
 
         });
 
-        console.log(sortedCourses);
+        
         
         // reverse array med antal sökande för kurs
         let reversedAplNumbCourses = sortedCourses.reverse();
@@ -51,7 +49,7 @@ async function loadCourses() {
         let highestAplNumbCourses = [reversedAplNumbCourses[0], reversedAplNumbCourses[1], reversedAplNumbCourses[2], reversedAplNumbCourses[3], reversedAplNumbCourses[4], reversedAplNumbCourses[5]];
         
         // reverse array med antal sökande för program
-        let reversedAplNumbPrograms = sortedProgramsNumb.reverse();
+        let reversedAplNumbPrograms = sortedPrograms.reverse();
         // sparar en array med de 6 program med flest antal sökande
         let highestAplNumbPrograms = [reversedAplNumbPrograms[0], reversedAplNumbPrograms[1], reversedAplNumbPrograms[2], reversedAplNumbPrograms[3], reversedAplNumbPrograms[4], reversedAplNumbPrograms[5]];
 
@@ -65,14 +63,28 @@ async function loadCourses() {
 }
 
 function addChartData(highestAplNumbCourses, highestAplNumbPrograms) {
+    //Arrayer för antal sökande kurser och namn kurser
     let NumberAplCourses = [];
     let NameCourses = [];
 
+    //Arrayer för antal sökande program och namn program
+    let NumberAplPrograms = [];
+    let NamePrograms = [];
+
+    // Filtrerar kurser och skickar antal och namn till varsin array 
     highestAplNumbCourses.forEach(course=>{
         NumberAplCourses.push(course.total);
         NameCourses.push(course.name);
         
     })
+
+    // Filtrerar program och skickar antal och namn till varsin array
+    highestAplNumbPrograms.forEach(program => {
+        NumberAplPrograms.push(program.total);
+        NamePrograms.push(program.name);
+    })
+
+
     /* för Chart.js */
 
     const chartDiv = document.getElementById("myChart");
@@ -97,10 +109,10 @@ function addChartData(highestAplNumbCourses, highestAplNumbPrograms) {
     new Chart(chartDiv2, {
         type: 'pie',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: [NamePrograms[0], NamePrograms[1], NamePrograms[2], NamePrograms[3], NamePrograms[4]],
             datasets: [{
                 label: '# of Votes',
-                data: [highestAplNumbPrograms[0], highestAplNumbPrograms[1], highestAplNumbPrograms[2], highestAplNumbPrograms[3], highestAplNumbPrograms[4]],
+                data: [NumberAplPrograms[0], NumberAplPrograms[1], NumberAplPrograms[2], NumberAplPrograms[3], NumberAplPrograms[4]],
                 borderWidth: 1
             }]
         },
