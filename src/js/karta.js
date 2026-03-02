@@ -1,6 +1,5 @@
 "use strict";
 
-console.log("Hej från Karta.js");
 
 // Deklarerar variabel globalt
 let map;
@@ -29,7 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // anropar funktion med sökfrasen som parameter
         loadCordinates(searchBoxValue);
 
-        console.log("du klickade på knappen")
 
     })
 
@@ -59,6 +57,8 @@ async function loadCordinates(city) {
 
     }
     catch (error) {
+        let felmeddelande = document.getElementById("felmeddelande");
+        felmeddelande.innerHTML="<p>Ett problem uppstod vid sökning. Prova igen senare</p>"
         console.error(`Felmeddelande: ${error}`);
     }
 }
