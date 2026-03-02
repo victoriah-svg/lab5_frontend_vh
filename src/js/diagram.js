@@ -4,7 +4,9 @@ const url = `https://mallarmiun.github.io/Frontend-baserad-webbutveckling/Moment
 
 let allCourses = [];
 
-let sortedCourses = [];
+let sortedCoursesNumb = [];
+
+let sortedProgramsNumb = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
     loadCourses();
@@ -21,14 +23,29 @@ async function loadCourses() {
         // lagrar alla kurser i global array
         allCourses = courses;
         allCourses.forEach(course => {
-            sortedCourses.push(course.applicantsTotal);
-            sortedCourses.sort((a, b) => a - b);
+            if (course.type === "Kurs") {
+                sortedCoursesNumb.push(course.applicantsTotal);
+                sortedCoursesNumb.sort((a, b) => a - b);
+                
+            } else {
+                sortedProgramsNumb.push(course.applicantsTotal);
+                sortedProgramsNumb.sort((a,b) => a-b);
+                
+            }
 
         });
-        let reversedAplNumb = sortedCourses.reverse();
-        let highestAplNumb = [reversedAplNumb[0], reversedAplNumb[1], reversedAplNumb[2], reversedAplNumb[3], reversedAplNumb[4], reversedAplNumb[5]];
-        console.log(highestAplNumb);
-        addChartData(highestAplNumb);
+        
+        // reverse array med antal sökande för kurs
+        let reversedAplNumbCourses = sortedCoursesNumb.reverse();
+        // sparar en array med de 6 kurser med flest antal sökande
+        let highestAplNumbCourses = [reversedAplNumbCourses[0], reversedAplNumbCourses[1], reversedAplNumbCourses[2], reversedAplNumbCourses[3], reversedAplNumbCourses[4], reversedAplNumbCourses[5]];
+        
+        let reversedAplNumbPrograms = sortedProgramsNumb.reverse();
+
+        let highestAplNumbPrograms = [reversedAplNumbPrograms[0], reversedAplNumbPrograms[1], reversedAplNumbPrograms[2], reversedAplNumbPrograms[3], reversedAplNumbPrograms[4], reversedAplNumbPrograms[5]];
+
+        // anropar funktion och skickar med de kurser och program med flest antal sökande
+        addChartData(highestAplNumbCourses, highestAplNumbPrograms);
 
     }
     catch (error) {
@@ -36,7 +53,7 @@ async function loadCourses() {
     }
 }
 
-function addChartData(highestAplNumb) {
+function addChartData(highestAplNumbCourses, highestAplNumbPrograms) {
     /* för Chart.js */
 
     const chartDiv = document.getElementById("myChart");
@@ -47,7 +64,7 @@ function addChartData(highestAplNumb) {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
                 label: '# of Votes',
-                data: [highestAplNumb[0], highestAplNumb[1], highestAplNumb[2], highestAplNumb[3], highestAplNumb[4], highestAplNumb[5]],
+                data: [highestAplNumbCourses[0], highestAplNumbCourses[1], highestAplNumbCourses[2], highestAplNumbCourses[3], highestAplNumbCourses[4]],
                 borderWidth: 1
             }]
         },
@@ -64,7 +81,7 @@ function addChartData(highestAplNumb) {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [highestAplNumbPrograms[0], highestAplNumbPrograms[1], highestAplNumbPrograms[2], highestAplNumbPrograms[3], highestAplNumbPrograms[4]],
                 borderWidth: 1
             }]
         },
