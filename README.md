@@ -7,4 +7,4 @@ Klona ner repot och kör följande kommandon:
     * npm install 
     * npm run dev
 
-#### 🌟Länk till [publicerad webbplats]()
+#### 🌟Länk till [publicerad webbplats](https://dynamiskawebbplatser-lab5-vh.netlify.app/)
