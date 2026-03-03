@@ -93,19 +93,26 @@
  /*Main kartsida*/
  #kartMain {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 1%;
+ }
+
+ /*text beskrivning kartsida*/
+ #kartBeskr {
+    grid-area: 1/1/2/3;
+    justify-self: center;
  }
 
  /*Searchbox kartsida*/
  #searchBox {
      justify-self: right;
-     grid-area: 1/1/2/2;
+     grid-area: 2/1/3/2;
  }
 
  /*Sökknapp*/
  #searchBtn {
     justify-self: left;
-    grid-area: 1/2/2/3;
+    grid-area: 2/2/3/3;
  }
  
  /*Karta kartsidan*/
@@ -113,7 +120,13 @@
      height: 500px;
      width: 800px;
      justify-self: center;
-     grid-area: 2/1/3/3;
+     grid-area: 3/1/4/3;
+ }
+
+ #felmeddelande {
+    justify-self: center;
+    align-self: top;
+    grid-area: 4/1/5/3;
  }
 
  

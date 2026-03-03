@@ -37,6 +37,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadCordinates(city) {
 
     try {
+        // div för felmeddelande
+        let felmeddelande = document.getElementById("felmeddelande");
+        //ta bort felmeddelande om det finns ett
+        if(felmeddelande.innerHTML!=""){
+            felmeddelande.innerHTML="";
+        }
+
         // const response = await fetch (`https://maps.googleapis.com/maps/api/geocode/json?address=Stockholm&key=AIzaSyAaiNMOkZvQQJrAexjmX-391lk3doYiLSE`);
         const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${city}&format=json`);
         const cordinates = await response.json();
