@@ -1,5 +1,7 @@
 "use strict";
-
+/**
+ * Ändrar klass på navigeringsmeny vid klick på hamburgersymbol
+ */
 document.addEventListener("DOMContentLoaded", () => {
 
     /*Hamburgermeny*/
@@ -14,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             nav.className = "topnav";
         }
-        console.log(nav.className);
+        
     });
 
    

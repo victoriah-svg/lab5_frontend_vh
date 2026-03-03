@@ -9,13 +9,20 @@ let sortedCourses = [];
 let sortedPrograms = [];
 
 
-
+/**
+ * Anropar funktion loadCourses när DOM-content har laddats in
+ */
 document.addEventListener("DOMContentLoaded", async () => {
     loadCourses();
 
 
 });
 
+/**
+ * Hämtar kurser och program från Mittuniversitetet och returnerar 2 arrayer
+ *  - en med ansökningstotal och namn på de 6 mest sökta kurserna och en med ansökningstotal och namn på de 6 mest sökta programmen. 
+ *  Dessa skickas vidare till addChartData
+ */
 async function loadCourses() {
 
 
@@ -61,7 +68,15 @@ async function loadCourses() {
         console.error(`Felmeddelande: ${error}`);
     }
 }
-
+/**
+ * Lägger till Antal sökande och namn på de populäraste kurserna och programmen på Mittuniversitetet i två diagram
+ * @param {object[]} highestAplNumbCourses - kurser
+ * @param {object[]} highestAplNumbPrograms - program
+ * @param {number} highestAplNumbCourses.total - totalt nummer ansökningar kurs
+ * @param {string} highestAplNumbCourses.name - kursnamn
+ * @param {number} highestAplNumbPrograms.total - totalt nummer ansökningar program
+ * @param {string} highestAplNumbPrograms.name - programnamn
+ */
 function addChartData(highestAplNumbCourses, highestAplNumbPrograms) {
     //Arrayer för antal sökande kurser och namn kurser
     let NumberAplCourses = [];
@@ -88,7 +103,7 @@ function addChartData(highestAplNumbCourses, highestAplNumbPrograms) {
     /* för Chart.js */
 
     const chartDiv = document.getElementById("myChart");
-
+    //Stapeldiagram med kurser
     new Chart(chartDiv, {
         type: 'bar',
         data: {
@@ -117,7 +132,7 @@ function addChartData(highestAplNumbCourses, highestAplNumbPrograms) {
     });
 
     const chartDiv2 = document.getElementById("myChart2");
-
+    // Cirkeldiagram med program
     new Chart(chartDiv2, {
         type: 'pie',
         data: {
